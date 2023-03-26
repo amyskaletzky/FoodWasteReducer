@@ -2,6 +2,7 @@ import Users from "../models/UserModel.js";
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
+import validator from "validator";
 
 dotenv.config();
 
@@ -50,6 +51,11 @@ export const login = async (req, res) => {
 export const register = async (req, res) => {
     console.log(req)
     const { username, password, first_name, last_name, email } = req.body;
+
+    // validating password, email, first_name, last_name and username 
+    if (!password || password.length < 8 || password.includes) res.status(400).json({ msg: 'Password must be at least 8 characters' })
+    if (!email || !validator.isEmail(email)) res.status(400).json({ msg: 'Not a valid email' })
+    if (!username, !first_name, !last_name) res.status(400).json({ msg: 'Please fill all the fields' })
 
     const salt = await bcrypt.genSalt();
     const hashPassword = await bcrypt.hash(password, salt);
