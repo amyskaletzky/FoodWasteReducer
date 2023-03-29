@@ -49,13 +49,14 @@ export const login = async (req, res) => {
 }
 
 export const register = async (req, res) => {
-    console.log(req)
-    const { username, password, first_name, last_name, email } = req.body;
+    const { username, password, firstName, lastName, email } = req.body;
 
     // validating password, email, first_name, last_name and username 
-    if (!password || password.length < 8 || password.includes) res.status(400).json({ msg: 'Password must be at least 8 characters' })
-    if (!email || !validator.isEmail(email)) res.status(400).json({ msg: 'Not a valid email' })
-    if (!username, !first_name, !last_name) res.status(400).json({ msg: 'Please fill all the fields' })
+    if (!password || password.length < 8) return res.status(400).json({ msg: 'Password must be at least 8 characters' })
+    if (!email || !validator.isEmail(email)) return res.status(400).json({ msg: 'Not a valid email' })
+    if (!username || !firstName || !lastName) return res.status(400).json({ msg: 'Please fill all the fields' })
+    if (username.length < 4) return res.status(400).json({ msg: 'Username must be at least 4 characters' })
+
 
     const salt = await bcrypt.genSalt();
     const hashPassword = await bcrypt.hash(password, salt);
@@ -63,8 +64,8 @@ export const register = async (req, res) => {
     try {
         await Users.create({
             username: username,
-            first_name: first_name,
-            last_name: last_name,
+            first_name: firstName,
+            last_name: lastName,
             email: email,
             password: hashPassword
         })
@@ -75,3 +76,5 @@ export const register = async (req, res) => {
         res.status(403).json({ msg: 'Failed to register, please check all fields and try again' })
     }
 }
+
+// const 

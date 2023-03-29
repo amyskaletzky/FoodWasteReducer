@@ -51,7 +51,7 @@ const LoginRegister = (props) => {
             {
 
                 props.title === 'Login' ?
-                    <div className="w-full max-w-xs">
+                    <div className="w-full max-w-xs m-auto">
                         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                             <div className="mb-4">
                                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
@@ -83,7 +83,7 @@ const LoginRegister = (props) => {
 
                     :
 
-                    <form className="w-full max-w-lg">
+                    <form className="w-full max-w-lg m-auto">
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
