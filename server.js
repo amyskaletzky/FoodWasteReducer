@@ -4,6 +4,9 @@ import cors from "cors";
 import dotenv from 'dotenv';
 import db from "./config/Database.js";
 import router from "./routes/Users.js";
+import path from 'path';
+const __dirname = path.resolve();
+
 
 dotenv.config();
 const app = express();
@@ -13,6 +16,8 @@ app.use(cookieParser());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use('/imgs', express.static(__dirname + '/imgs'))
 
 app.use(router);
 

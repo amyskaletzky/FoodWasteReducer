@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
+import { Meals, FaveMeals } from "./Meals.js";
 
 const { DataTypes } = Sequelize;
 
@@ -26,5 +27,8 @@ const Users = db.define('food_reducer_users', {
         tableName: 'food_reducer_users'
     }
 )
+
+Users.hasMany(Meals) //add foreign key and as if wanted
+Users.belongsToMany(Meals, { through: FaveMeals })
 
 export default Users;
