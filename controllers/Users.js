@@ -76,5 +76,3 @@ export const register = async (req, res) => {
         res.status(403).json({ msg: 'Failed to register, please check all fields and try again' })
     }
 }
-
-// const 

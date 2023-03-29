@@ -1,6 +1,5 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
-import Users from "./UserModel.js";
 
 const { DataTypes } = Sequelize;
 
@@ -52,4 +51,12 @@ export const FaveMeals = db.define('favourite_meals', {
     }
 )
 
-Users.belongsToMany(Meals, { through: 'favourite_meals' })
+Meals.associate = (models) => {
+    Meals.belongsTo(models.Users,
+        { foreignKey: user_id })
+}
+
+Meals.associate = (models) => {
+    Meals.belongsToMany(models.Users,
+        { through: FaveMeals })
+}

@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import App, { AppContext } from '../App';
+import { AppContext } from '../App';
 
 const LoginRegister = (props) => {
     const [email, setEmail] = useState('');
