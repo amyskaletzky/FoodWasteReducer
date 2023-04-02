@@ -14,16 +14,18 @@ export const getAllMeals = async (req, res) => {
 }
 
 export const insertMeals = async (req, res) => {
+    const { title, ingredients, instructions, dietaryRestrictions, nutritionalData, img, duration, user_id } = req.body
     try {
         const meal = Meals.create({
-            title: req.body.title,
-            ingredients: req.body.ingredients,
-            instructions: req.body.instructions,
-            dietaryRestrictions: req.body.dietaryRestrictions,
-            nutritional_data: req.body.nutritionalData,
-            img: req.body.img,
-            duration: req.body.duration,
-            user_id: req.body.user_id
+            title: title,
+            ingredients: ingredients,
+            instructions: instructions,
+            dietary_restrictions: dietaryRestrictions,
+            nutritional_data: nutritionalData,
+            num_of_servings: numOfServings,
+            img: img,
+            duration: duration,
+            user_id: user_id
         })
         res.json({ msg: 'inserted meal to database successfully!' })
     } catch (err) {

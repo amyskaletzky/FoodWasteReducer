@@ -4,7 +4,7 @@ import LoginRegister from './components/LoginRegister';
 import Favourites from './components/Favourites';
 import PersonalDetails from './components/PersonalDetails';
 import Discovery from './components/Discovery';
-// here import Auth
+import { Auth } from './auth/Auth';
 import { Routes, Route } from 'react-router-dom';
 import { useState, createContext } from 'react';
 import './App.css';
@@ -21,8 +21,8 @@ function App() {
           <Route path='/login' element={<LoginRegister title='Login' />} />
           <Route path='/register' element={<LoginRegister title='Register' />} />
           <Route path='/' element={<HomePage />} />
-          <Route path='/favourites' element={<Favourites />} />
-          <Route path='/details' element={<PersonalDetails />} />
+          <Route path='/favourites' element={<Auth><Favourites /></Auth>} />
+          <Route path='/details' element={<Auth><PersonalDetails /></Auth>} />
           <Route path='/discover' element={<Discovery />} />
         </Routes>
       </div>
