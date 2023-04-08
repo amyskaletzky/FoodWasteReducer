@@ -50,14 +50,16 @@ const HomePage = (props) => {
         //like  auth()
         // if token == true => 
         // if accessToken
-        if (CheckIfLoggedIn()) {
-            getUserDetails()
+        const res = await CheckIfLoggedIn()
+        if (res) {
+            const user_id = await getUserDetails()
 
             try {
                 let response = await axios.post('http://localhost:5002/recipe', {
-                    ingredients, dairyFree, vegetarian, vegan, kosher, halal, diabetes, allergies, extras
+                    ingredients, dairyFree, vegetarian, vegan, kosher, halal, diabetes, allergies, extras, user_id
                 })
                 console.log(response.data);
+
             } catch (err) {
                 console.log(err);
             }
@@ -65,16 +67,19 @@ const HomePage = (props) => {
         }
     }
 
-    const getUserDetails = (req, res, next) => {
+    const getUserDetails = (req, res) => {
         try {
-            console.log('accessToken:', accessToken.accessToken);
+            console.log('hi!');
+            const decode = jwt_decode(accessToken.accessToken)
+            const user_id = decode.userid
+            console.log(user_id);
+            return user_id
+
         } catch (err) {
             console.log(err);
         }
 
     }
-
-
 
     return (
         <>
@@ -101,7 +106,6 @@ const HomePage = (props) => {
 
                 <label htmlFor="diabetes">Diabetes</label>
                 <input type="checkbox" id='diabetes' name='diabetes' onClick={(e) => e.target.checked ? setDiabetes(e.target.name) : setDiabetes('')} /><br />
-
 
                 <label htmlFor='food-allergies'>If you have any food allergies, please write them here:</label><br />
                 <input type='text' id='food-allergies' name='food-allergies' onChange={(e) => setAllergies(e.target.value)} /><br />

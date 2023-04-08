@@ -26,18 +26,18 @@ export const login = async (req, res) => {
             }
         })
         const match = await bcrypt.compare(req.body.password, user[0].password)
-        if (!match) return res.state(400).json({ msg: 'wrong password, please try again' })
+        if (!match) return res.status(400).json({ msg: 'wrong password, please try again' })
 
         const userid = user[0].id;
         const username = user[0].username
 
         const accessToken = jwt.sign({ userid, username }, process.env.ACCESS_TOKEN_SECRET, {
-            expiresIn: '60s' // change to 5 minutes later on
+            expiresIn: '6000s' // change to 5 minutes later on
         })
 
         res.cookie('accessToken', accessToken, {
             httpOnly: true,
-            maxAge: 60 * 1000 // also change to 5 minutes later on
+            maxAge: 6000 * 1000 // also change to 5 minutes later on
         })
 
         res.json({ accessToken });

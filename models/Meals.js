@@ -11,16 +11,19 @@ export const Meals = db.define('meals', {
         type: DataTypes.STRING
     },
     ingredients: {
-        type: DataTypes.STRING
+        type: DataTypes.JSON
     },
     instructions: {
-        type: DataTypes.STRING
+        type: DataTypes.JSON
     },
     nutritional_data: {
-        type: DataTypes.STRING
+        type: DataTypes.JSON
     },
     dietary_restrictions: {
-        type: DataTypes.STRING
+        type: DataTypes.JSON
+    },
+    num_of_servings: {
+        type: DataTypes.INTEGER
     },
     img: {
         type: DataTypes.STRING
@@ -51,12 +54,12 @@ export const FaveMeals = db.define('favourite_meals', {
     }
 )
 
-Meals.associate = (models) => {
-    Meals.belongsTo(models.Users,
-        { foreignKey: user_id })
-}
+// Meals.associate = (models) => {
+//     Meals.belongsTo(models.Users,
+//         { foreignKey: user_id })
+// }
 
-Meals.associate = (models) => {
-    Meals.belongsToMany(models.Users,
-        { through: FaveMeals })
-}
+// Meals.associate = (models) => {
+//     Meals.belongsToMany(models.Users,
+//         { through: FaveMeals })
+// }

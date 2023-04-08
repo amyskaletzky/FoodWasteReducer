@@ -14,17 +14,19 @@ export const getAllMeals = async (req, res) => {
 }
 
 export const insertMeals = async (req, res) => {
-    const { title, ingredients, instructions, dietaryRestrictions, nutritionalData, img, duration, user_id } = req.body
+    const { title, ingredients, instructions, dietary_restrictions, nutritional_data, num_of_servings, img, duration, user_id } = req.body
+    console.log('req body from controllers:', req.body);
+    console.log('this is all the destructured data:', title, ingredients, instructions, dietary_restrictions, nutritional_data, num_of_servings, img, duration, user_id);
     try {
         const meal = Meals.create({
             title: title,
-            ingredients: ingredients,
-            instructions: instructions,
-            dietary_restrictions: dietaryRestrictions,
-            nutritional_data: nutritionalData,
-            num_of_servings: numOfServings,
-            img: img,
             duration: duration,
+            ingredients: JSON.stringify(ingredients),   //maybe a little unnecessary to stringify? because sometimes the result is not a json
+            instructions: instructions, 
+            dietary_restrictions: dietary_restrictions,
+            nutritional_data: JSON.stringify(nutritional_data), //necessary to stringify
+            num_of_servings: num_of_servings,
+            img: img,
             user_id: user_id
         })
         res.json({ msg: 'inserted meal to database successfully!' })
