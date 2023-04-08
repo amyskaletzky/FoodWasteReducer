@@ -41,6 +41,10 @@ const LoginRegister = (props) => {
                 console.log(err.response.data);
                 setMsg(err.response.data.msg)
             }
+        } else if (id === 'reg') {
+            navigate('/register')
+        } else if (id === 'goLog') {
+            navigate('/login')
         }
 
 
@@ -74,6 +78,12 @@ const LoginRegister = (props) => {
                                 {/* <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
                             Forgot Password?
                         </a> */}
+                            </div>
+                            <div className="flex items-center justify-center">
+                                {/* justify-between if adding the forgot password */}
+                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => handleAction('reg')}>
+                                    Click Here to Register
+                                </button>
                             </div>
                         </form>
                         <p className="text-center text-gray-500 text-xs">
@@ -131,6 +141,12 @@ const LoginRegister = (props) => {
                             {/* <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
                             Forgot Password?
                         </a> */}
+                        </div>
+                        <div className="flex items-center justify-center">
+                            {/* justify-between if adding the forgot password */}
+                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => handleAction('goLog')}>
+                                Go to Login
+                            </button>
                         </div>
                     </form>
             }

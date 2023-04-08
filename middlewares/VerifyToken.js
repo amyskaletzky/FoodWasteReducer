@@ -16,7 +16,6 @@ export const VerifyToken = (req, res, next) => {
         req.username = decoded.username
         req.userid = decoded.userid
 
-        console.log(req)
         try {
             const user = await Users.findAll({
                 where: {
