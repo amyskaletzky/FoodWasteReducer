@@ -3,7 +3,7 @@ import NavBar from './components/NavBar';
 import LoginRegister from './components/LoginRegister';
 import Favourites from './components/Favourites';
 import PersonalDetails from './components/PersonalDetails';
-import Discovery from './components/Discovery';
+import Discover from './components/Discover';
 import { Auth } from './auth/Auth';
 import { Routes, Route } from 'react-router-dom';
 import { useState, createContext } from 'react';
@@ -23,7 +23,7 @@ function App() {
           <Route path='/' element={<HomePage />} />
           <Route path='/favourites' element={<Auth><Favourites /></Auth>} />
           <Route path='/details' element={<Auth><PersonalDetails /></Auth>} />
-          <Route path='/discover' element={<Discovery />} />
+          <Route path='/discover' element={<Discover />} />
         </Routes>
       </div>
     </AppContext.Provider>
