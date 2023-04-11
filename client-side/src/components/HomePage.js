@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { AppContext } from '../App';
 import { useNavigate } from 'react-router-dom';
-import Discovery from './Discovery';
+import Discover from './Discover';
 import axios from 'axios';
 import { Auth } from '../auth/Auth';
 import jwt_decode from 'jwt-decode';
@@ -115,7 +115,7 @@ const HomePage = (props) => {
 
                 <input type='submit' value='Submit' />
             </form>
-            <Discovery />
+            <Discover />
         </>
     )
 }

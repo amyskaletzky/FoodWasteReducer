@@ -18,6 +18,16 @@ export const getUsers = async (req, res) => {
     }
 }
 
+export const getUserById = async (req, res) => {
+    let id = req.params.id.substring(1)
+    try {
+        const user = await Users.findByPk(id)
+        res.json(user)
+    } catch (err) {
+        console.log(err.response)
+    }
+}
+
 export const login = async (req, res) => {
     try {
         const user = await Users.findAll({

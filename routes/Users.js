@@ -1,6 +1,6 @@
 import express from "express";
-import { register, login, getUsers } from "../controllers/Users.js";
-import { getAllMeals, insertMeals } from "../controllers/Meals.js";
+import { register, login, getUsers, getUserById } from "../controllers/Users.js";
+import { insertMeals, getMealsAndUsername } from "../controllers/Meals.js";
 import { getRecipe } from "../fetchingData.js";
 import { VerifyToken } from "../middlewares/VerifyToken.js";
 import jwt from "jsonwebtoken";
@@ -14,9 +14,11 @@ router.post('/recipe', getRecipe);
 
 router.post('/insert', insertMeals);
 
-router.get('/discover', getAllMeals);
+// router.get('/discover', getAllMeals);
+router.get('/discover', getMealsAndUsername);
 
 router.get('/users', VerifyToken, getUsers);
+router.get('/user/:id', getUserById);
 router.get('/token', VerifyToken, (req, res) => {
     const userid = req.userid;
     const username = req.username;
