@@ -113,7 +113,7 @@ const HomePage = (props) => {
                 <label htmlFor='extras'>If you have any any extra notes, please write them here:</label><br />
                 <input type='text' id='extras' name='extras' onChange={(e) => setExtras(e.target.value)} /><br />
 
-                <input type='submit' value='Submit' />
+                <input className='duration-300' type='submit' value='Submit' />
             </form>
             <Discover />
         </>

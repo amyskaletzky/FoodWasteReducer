@@ -1,15 +1,29 @@
-body {
+/* body {
     display: flex;
     flex-direction: column;
-}
+} */
 
 img {
     width: 10rem;
 }
 
+.favicon-icon {
+    width: 2rem;
+}
+
+.title {
+    /* margin-left: 0; */
+    margin-right: 1.8rem
+        /* margin: 0.5rem 2rem 0rem; */
+}
+
 .meal-div {
     display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
+    flex-direction: row;
     align-items: center;
 }
+
+/* .meal-div>* {
+    display: flex;
+    flex-direction: column;
+} */

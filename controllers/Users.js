@@ -18,6 +18,7 @@ export const getUsers = async (req, res) => {
     }
 }
 
+// dont need this i think?
 export const getUserById = async (req, res) => {
     let id = req.params.id.substring(1)
     try {

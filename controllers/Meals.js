@@ -63,3 +63,14 @@ export const getMealsAndUsername = async (req, res) => {
         res.status(403).json({ msg: 'failed to retrieve meals from database' })
     }
 }
+
+export const getMealById = async (req, res) => {
+    console.log('controller:', req.params)
+    try {
+        const meal = await Meals.findByPk(req.params.id.substring(1))
+        console.log('meal:', meal.dataValues)
+        res.json(meal.dataValues)
+    } catch (err) {
+        console.log(err.response);
+    }
+}

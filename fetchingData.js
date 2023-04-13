@@ -34,7 +34,7 @@ export const getRecipe = async (req, res) => {
         const messages = [];
         messages.push({
             role: "assistant", content: `Write a recipe with
-    ${ingredients}, 'title', 'ingredients' with quantity as string, 'duration', 'nutritionalData', 'dietaryRestrictions', 'numOfServings', 'instructions'
+    ${ingredients}, 'title', 'ingredients' with quantity as string, 'duration' (which is the overall time taken to prepare and cook the meal), 'nutritionalData', 'dietaryRestrictions', 'numOfServings', 'instructions'
     ${dairyFree} ${vegetarian} ${vegan} ${kosher} ${halal} ${diabetes} ${allergies + ' allergy'} ${extras} 
     return as a javascript JSON object (with "" around each key) without const and console.log` });
 
