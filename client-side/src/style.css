@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.login {
+    /* background-image: url('imgs/bg-1.avif'); */
+    /* background-image: url('imgs/bg-2.jpg'); */
+    background-image: url('imgs/bg-3.jpg');
+    background-size: cover;
+    /* background-repeat: no-repeat; */
+}

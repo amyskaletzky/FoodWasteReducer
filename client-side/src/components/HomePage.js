@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { AppContext } from '../App';
 import { useNavigate } from 'react-router-dom';
+import NavBar from './NavBar';
 import Discover from './Discover';
 import axios from 'axios';
 import { Auth } from '../auth/Auth';
@@ -81,6 +82,8 @@ const HomePage = (props) => {
 
     return (
         <>
+            <NavBar />
+
             <h1>HomePage</h1>
             <form className='' onSubmit={handleAction}>
                 <label htmlFor="ingredients">Mandatory: Enter the ingredients you have</label><br />
