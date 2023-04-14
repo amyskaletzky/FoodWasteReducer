@@ -18,7 +18,7 @@ export const insertMeals = async (req, res) => {
     console.log('req body from controllers:', req.body);
     console.log('this is all the destructured data:', title, ingredients, instructions, dietary_restrictions, nutritional_data, num_of_servings, img, duration, user_id);
     try {
-        await Meals.create({
+        const meal = await Meals.create({
             title: title,
             duration: duration,
             ingredients: JSON.stringify(ingredients),   //maybe a little unnecessary to stringify? because sometimes the result is not a json
@@ -29,7 +29,7 @@ export const insertMeals = async (req, res) => {
             img: img,
             user_id: user_id
         })
-        res.json({ msg: 'inserted meal to database successfully!' })
+        res.json({ msg: 'inserted meal to database successfully!', meal: meal })
     } catch (err) {
         console.log(err);
         res.status(403).json({ msg: 'failed to insert meal to database' })
@@ -67,7 +67,7 @@ export const getMealsAndUsername = async (req, res) => {
 export const getMealById = async (req, res) => {
     console.log('controller:', req.params)
     try {
-        const meal = await Meals.findByPk(req.params.id.substring(1))
+        const meal = await Meals.findByPk(req.params.id)
         console.log('meal:', meal.dataValues)
         res.json(meal.dataValues)
     } catch (err) {

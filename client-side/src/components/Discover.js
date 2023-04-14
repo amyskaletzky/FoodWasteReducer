@@ -20,7 +20,7 @@ const Discover = (props) => {
             try {
                 const response = await axios.get('/discover');
                 setMeals(response.data)
-
+                console.log(response.data)
             } catch (err) {
                 console.log(err.response);
             }
@@ -28,21 +28,16 @@ const Discover = (props) => {
         getMeals()
     }, [])
 
-    const openRecipe = async (meal) => {
-        try {
-            console.log(meal)
-            setMealDetails(meal)
+    // const openRecipe = async (meal) => {
+    //     try {
+    //         console.log(meal)
+    //         setMealDetails(meal)
 
-        } catch (err) {
-            console.log(err)
-        }
-
-    }
-    // useEffect(() => {
-    //     if (mealDetails !== undefined) {
-    //         navigate('/recipe');
+    //     } catch (err) {
+    //         console.log(err)
     //     }
-    // }, [mealDetails, navigate]);
+
+    // }
 
     return (
         <>
@@ -50,16 +45,25 @@ const Discover = (props) => {
                 {
                     meals.map(meal => {
                         {/* ingredients (ask Ziv if this is okay? if it's enough thinking of random cases or not)*/ }
+                        {/* console.log('username:', meal.food_reducer_user.username) */ }
                         let ingredients = JSON.parse(meal.ingredients)
-                        ingredients = ingredients.map(x => {
-                            if (typeof x == 'object') {
-                                const keys = Object.keys(x)
-                                const ing = `${x[keys[1]]} ${x[keys[0]]} `
-                                return ing
-                            } else {
-                                return x
-                            }
-                        })
+                        if (Array.isArray(ingredients)) {
+                            ingredients = ingredients.map(x => {
+                                if (typeof x == 'object') {
+                                    const keys = Object.keys(x)
+                                    const ing = `${x[keys[1]]} ${x[keys[0]]} `
+                                    return ing
+                                } else {
+                                    return x
+                                }
+                            })
+                        } else {
+                            ingredients = Object.entries(ingredients)
+                            console.log(ingredients)
+                            ingredients.map(([key, value]) => {
+                                console.log(value, key)
+                            })
+                        }
 
                         {/* nutritional data (also ask Ziv) */ }
                         let nutritionalData = JSON.parse(meal.nutritional_data)
@@ -71,12 +75,11 @@ const Discover = (props) => {
                                 value = value.replace(key, '')
                             }
 
-                            if (key === 'calories' && !value.includes('kcal')) {
+                            if (key.toLowerCase() === 'calories' && !value.includes('kcal')) {
                                 /\s/.test(value) === true ? value = value + 'kcal' : value = value + ' ' + 'kcal'
                             }
                             return value
                         })
-
                         {/* mx-auto -> to center */ }
                         {/* <div className="max-w-sm  bg-white rounded-xl shadow-2xl shadow-indigo-900 mt-4 w-48 text-indigo-600 h-40 items-center transform transition-all hover:scale-110 meal-div" key={meal.id} > */ }
                         {/* <div className="flex-row meal-div bg-violet-300 m-6 shadow-lg rounded max-w-sm" key={meal.id} > */ }
@@ -96,16 +99,28 @@ const Discover = (props) => {
                                     <img src={`imgs/${meal.img}`} />
                                     <ul className="list-disc"> Ingredients:
 
-                                        {ingredients.map(ingredient => {
-                                            return (
-                                                <li>{ingredient}</li>
-                                            )
-                                        })}
+                                        {
+                                            ingredients.map(ingredient => {
+                                                return (
+                                                    <li>{ingredient}</li>
+                                                )
+                                            })}
 
                                     </ul>
+                                    {/* <ul> Nutrition:
+                                        {
 
-                                    <p className="m-3">Created by User:{meal.food_reducer_user.username}</p>
-                                    <button type="button" onClick={() => openRecipe(meal)} className="rounded-full bg-violet-300 p-3 transform transition-all hover:scale-105 mt-auto"> <Link to={`/meal/${meal.id}`}>Click to see recipe</Link></button>
+                                            nutritionalData.map((data, i) => {
+                                                return (
+                                                    <li>{nutritionKeys[i]}: {data}</li>
+                                                )
+                                            })
+                                        }
+                                    </ul> */}
+
+                                    {/* <p className="m-3">Created by User:{meal.food_reducer_user.username}</p> */}
+                                    {/* <button type="button" onClick={() => openRecipe(meal)} className="rounded-full bg-violet-300 p-3 transform transition-all hover:scale-105 mt-auto"> </button> */}
+                                    <Link className="rounded-full bg-violet-300 p-3 transform transition-all hover:scale-105 mt-auto" to={`/meal/${meal.id}`}>Click to see recipe</Link>
 
                                 </div>
                             </div >

@@ -1,4 +1,5 @@
 import { Configuration, OpenAIApi } from 'openai';
+import { insertMeals } from './controllers/Meals.js';
 import dotenv from 'dotenv';
 import axios from 'axios';
 import fs from 'fs';
@@ -34,7 +35,7 @@ export const getRecipe = async (req, res) => {
         const messages = [];
         messages.push({
             role: "assistant", content: `Write a recipe with
-    ${ingredients}, 'title', 'ingredients' with quantity as string, 'duration' (which is the overall time taken to prepare and cook the meal), 'nutritionalData', 'dietaryRestrictions', 'numOfServings', 'instructions'
+    ${ingredients}, 'title', 'ingredients' as an array with quantity as string, 'duration' (which is the overall time taken to prepare and cook the meal), 'nutritionalData', 'dietaryRestrictions', 'numOfServings', 'instructions'
     ${dairyFree} ${vegetarian} ${vegan} ${kosher} ${halal} ${diabetes} ${allergies + ' allergy'} ${extras} 
     return as a javascript JSON object (with "" around each key) without const and console.log` });
 
@@ -67,9 +68,19 @@ export const getRecipe = async (req, res) => {
                 user_id: user_id
             }
             console.log(newMeal)
-            let res = await axios.post('http://localhost:5002/insert', {
-                title, ingredients, instructions, dietary_restrictions: dietaryRestrictions, nutritional_data: nutritionalData, num_of_servings: numOfServings, img, duration, user_id
-            })
+            // let res = await axios.post('http://localhost:5002/insert', {
+            //     title, ingredients, instructions, dietary_restrictions: dietaryRestrictions, nutritional_data: nutritionalData, num_of_servings: numOfServings, img, duration, user_id
+            // })
+            req.body.dietary_restrictions = dietaryRestrictions
+            req.body.nutritional_data = nutritionalData
+            req.body.num_of_servings = numOfServings
+            req.body.title = title
+            req.body.ingredients = ingredients
+            req.body.instructions = instructions
+            req.body.img = img
+            req.body.duration = duration
+            req.body.user_id = user_id
+            insertMeals(req, res)
         } catch (e) {
             console.log(e);
         }

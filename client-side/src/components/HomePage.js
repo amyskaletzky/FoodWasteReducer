@@ -17,6 +17,11 @@ const HomePage = (props) => {
     const [allergies, setAllergies] = useState('')
     const [extras, setExtras] = useState('')
 
+    const [loading, setLoading] = useState(false)
+    const [meal, setMeal] = useState(null)
+    const [showData, setShowData] = useState(false);
+
+
     const { accessToken, setAccessToken } = useContext(AppContext)
     const navigate = useNavigate()
 
@@ -37,19 +42,9 @@ const HomePage = (props) => {
 
     const handleAction = async (e) => {
         e.preventDefault()
-
-        // console.log(ingredients)
-        // console.log(dairyFree)
-        // console.log(vegetarian)
-        // console.log(vegan)
-        // console.log(kosher)
-        // console.log(halal)
-        // console.log(diabetes)
-        // console.log(allergies)
-        // console.log(extras)
-        //like  auth()
-        // if token == true => 
-        // if accessToken
+        if (!ingredients) return
+        setLoading(true)
+        setShowData(false)
         const res = await CheckIfLoggedIn()
         if (res) {
             const user_id = await getUserDetails()
@@ -58,10 +53,13 @@ const HomePage = (props) => {
                 let response = await axios.post('http://localhost:5002/recipe', {
                     ingredients, dairyFree, vegetarian, vegan, kosher, halal, diabetes, allergies, extras, user_id
                 })
-                console.log(response.data);
-
+                console.log('res data:', response.data.meal);
+                setMeal(response.data.meal)
+                setLoading(false)
+                setShowData(true)
             } catch (err) {
                 console.log(err);
+                setLoading(false)
             }
 
         }
@@ -84,7 +82,7 @@ const HomePage = (props) => {
     return (
         <>
             <h1>HomePage</h1>
-            <form onSubmit={handleAction}>
+            <form className='' onSubmit={handleAction}>
                 <label htmlFor="ingredients">Mandatory: Enter the ingredients you have</label><br />
                 <input type="text" placeholder="enter your ingredients" id="ingredients" onChange={(e) => setIngredients(e.target.value)} /><br />
 
@@ -115,7 +113,51 @@ const HomePage = (props) => {
 
                 <input className='duration-300' type='submit' value='Submit' />
             </form>
-            <Discover />
+
+            {
+                (showData) ?
+
+                    (
+                        <div>
+                            <p>{meal.id}</p>
+                            <p>{meal.title}</p>
+                            <p>{meal.duration}</p>
+                            <p>{meal.ingredients}</p>
+                            <p>{meal.num_of_servings}</p>
+                            <p>{meal.nutritional_data}</p>
+                            <p>{meal.instructions}</p>
+                            <img src={`../../imgs/${meal.img}`} />
+                        </div>
+                    ) : loading ? (<p>Loading...</p>) : <></>
+
+            }
+            {/* {
+                (meal?.id && meal?.ingredients && meal?.title && meal?.instructions && meal?.nutritional_data && !loading) ?
+
+                    (
+                        <div>
+                            <p>{meal.id}</p>
+                            <p>{meal.title}</p>
+                            <p>{meal.duration}</p>
+                            <p>{meal.ingredients}</p>
+                            <p>{meal.num_of_servings}</p>
+                            <p>{meal.nutritional_data}</p>
+                            <p>{meal.instructions}</p>
+                            <img src={`../../imgs/${meal.img}`} />
+                        </div>
+                    ) : noLoadingSign ? <></> : (<p>Loading...</p>)
+
+            } */}
+            {/* imgs/img-vQSaOOKz9zAJ1NkZOxHX7WUJ.png */}
+
+            {/* {meal?.id && (
+                <div>
+                    <p>{meal.id}</p>
+                    <p>{meal.duration}</p>
+                </div>
+            )} */}
+
+            {/* <Discover /> */}
         </>
     )
 }

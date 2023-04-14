@@ -9,6 +9,7 @@ const LoginRegister = (props) => {
     const [lastName, setLastName] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [password2, setPassword2] = useState('');
     const [msg, setMsg] = useState('');
     const navigate = useNavigate();
     const { setAccessToken } = useContext(AppContext);
@@ -19,14 +20,18 @@ const LoginRegister = (props) => {
 
     const handleAction = async (id) => {
         if (id === 'Register') {
-            try {
-                let res = await axios.post('/register', {
-                    firstName, lastName, username, email, password
-                })
-                navigate('/login')
-            } catch (err) {
-                console.log(err.response.data);
-                setMsg(err.response.data.msg)
+            if (password === password2) {
+                try {
+                    let res = await axios.post('/register', {
+                        firstName, lastName, username, email, password
+                    })
+                    navigate('/login')
+                } catch (err) {
+                    console.log(err.response.data);
+                    setMsg(err.response.data.msg)
+                }
+            } else {
+                setMsg('Passwords do not match')
             }
         } else if (id === 'Login') {
             try {
@@ -75,6 +80,9 @@ const LoginRegister = (props) => {
                                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => handleAction(props.title)}>
                                     Sign In
                                 </button>
+                                <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+                                    Forgot Password?
+                                </a>
                                 {/* <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
                             Forgot Password?
                         </a> */}
@@ -133,6 +141,14 @@ const LoginRegister = (props) => {
                                 <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="password" placeholder="******************" onChange={(e) => setPassword(e.target.value)} />
                             </div>
                         </div>
+                        <div className="flex flex-wrap -mx-3 mb-6">
+                            <div className="w-full px-3">
+                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password2">
+                                    Reenter Password
+                                </label>
+                                <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password2" type="password2" placeholder="******************" onChange={(e) => setPassword2(e.target.value)} />
+                            </div>
+                        </div>
                         <div className="flex items-center justify-center">
                             {/* justify-between if adding the forgot password */}
                             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => handleAction(props.title)}>
@@ -146,6 +162,7 @@ const LoginRegister = (props) => {
                             {/* justify-between if adding the forgot password */}
                             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => handleAction('goLog')}>
                                 Go to Login
+
                             </button>
                         </div>
                     </form>

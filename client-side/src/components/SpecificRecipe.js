@@ -10,23 +10,37 @@ import jwt_decode from 'jwt-decode';
 
 const SpecificRecipe = (props) => {
     const { id } = useParams()
-    const [mealDetails, setMealDetails] = useState()
+    const [mealDetails, setMealDetails] = useState({})
     const [ingredients, setIngredients] = useState([]);
     const [nutrition, setNutrition] = useState([]);
     const [nutritionKeys, setNutritionKeys] = useState([]);
+    const [dietary, setDietary] = useState([]);
 
     useEffect(() => {
         const getMeal = async () => {
             console.log('specific RECIPE: ', id)
-            const response = await axios.get(`/meal/:${id}`)
+            const response = await axios.get(`/meal/${id}`)
+            console.log('rfgnj:',response.data);
             setMealDetails(response.data)
-            setIngredients(JSON.parse(response.data.ingredients))
+            const parseIng = JSON.parse(response.data.ingredients)
+            console.log('ing', parseIng); console.log(Array.isArray(parseIng))
+            if (!Array.isArray(parseIng)) {
+                let arr = []
+                arr.push(Object.values(parseIng))
+                setIngredients([...arr])
+                console.log('arr:', arr);
+            } else {
+                console.log('parseIng: ', parseIng);
+                setIngredients(parseIng)
+            }
+            // (Array.isArray(JSON.parse(response.data.ingredients))) ? setIngredients(JSON.parse(response.data.ingredients)) : setIngredients(new Array().push(JSON.parse(response.data.ingredients)))
             setNutrition(JSON.parse(response.data.nutritional_data))
             setNutritionKeys(Object.keys(JSON.parse(response.data.nutritional_data)))
+            // setDietary(JSON.parse())
             // console.log('meal DEETS:', mealDetails)
         }
         getMeal()
-    }, [id])
+    }, [])
 
   
     //         let nutritionalData = JSON.parse(mealDetails.nutritional_data)
@@ -38,7 +52,7 @@ const SpecificRecipe = (props) => {
     //                 value = value.replace(key, '')
     //             }
 
-    //             if (key === 'calories' && !value.includes('kcal')) {
+    //             if (key === 'calories' && !va lue.includes('kcal')) {
     //                 /\s/.test(value) === true ? value = value + 'kcal' : value = value + ' ' + 'kcal'
     //             }
     //             return value
@@ -73,10 +87,25 @@ const SpecificRecipe = (props) => {
     // const nutritionKeys = mealDetails.nutritional_data ? Object.keys(JSON.parse(mealDetails.nutritional_data)) : [];
 
 
-
+    // useEffect(() => {
+    //     if (mealDetails && ingredients) {
+    //         // let i = JSON.parse(ingredients)
+    //         setIngredients(ingredients.map(x => {
+    //             if (typeof x == 'object') {
+    //                 const keys = Object.keys(x)
+    //                 const ing = `${x[keys[1]]} ${x[keys[0]]} `
+    //                 console.log('ERIJSNEIBR:',ing);
+    //                 return ing
+    //             } else {
+    //                 return x
+    //             }
+    //         }))
+    //     }
+    // }, [])
+    
     return (
         <>
-            {!mealDetails ? (
+            {(!mealDetails || !ingredients || !nutrition || !nutritionKeys) ? (
                 <div>Loading...</div>
             ) :
                 (
@@ -86,23 +115,35 @@ const SpecificRecipe = (props) => {
                         <p>{mealDetails.duration}</p>
                         <ul className="list-disc"> Ingredients:
 
-                            {
-                                ingredients.map(ingredient => {
-                                return (
-                                    <li>{ingredient}</li>
-                                )
-                            })}
-
+                               { ingredients.map(ingredient => {
+                                    return (
+                            <li>{ingredient}</li>
+                            )
+                                })} 
                         </ul>
                         <ul> Nutrition:
-                            {
-                                nutrition.map((data, i) => {
+                            {/* {
+                              
+                                nd = nutritionKeys.map((key,i) => {
+                                    let value = nutrition[key]
+                                    if (value.includes(key)) {
+                                        value = value.replace(key, '')
+                                    }
+
+                                    if (key === 'calories' && !value.includes('kcal')) {
+                                        /\s/.test(value) === true ? value = value + 'kcal' : value = value + ' ' + 'kcal'
+                                    }
                                     return (
-                                        <li>{nutritionKeys[i]}: {data}</li>
+                                        <li key={i}>{key}: {value}</li>
                                     )
                                 })
-                            }
+
+
+                            } */}
                         </ul>
+                  
+                           
+
                     </div>
                 )
 
