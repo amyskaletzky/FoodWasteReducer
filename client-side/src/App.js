@@ -8,6 +8,7 @@ import SpecificRecipe from './components/SpecificRecipe';
 import { Auth } from './auth/Auth';
 import { Routes, Route } from 'react-router-dom';
 import { useState, createContext } from 'react';
+import './style.css'
 import './App.css';
 
 export const AppContext = createContext(null);
@@ -20,7 +21,6 @@ function App() {
     <AppContext.Provider value={{ accessToken, setAccessToken }}>
       <MealContext.Provider value={{ mealDetails, setMealDetails }}>
         <div className="App">
-          <NavBar />
           <Routes>
             <Route path='/login' element={<LoginRegister title='Login' />} />
             <Route path='/register' element={<LoginRegister title='Register' />} />

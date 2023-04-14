@@ -55,44 +55,40 @@ const LoginRegister = (props) => {
 
     }
     return (
-        <>
-            <h1>{props.title}</h1>
+        // backdrop-blur-sm bg-opacity-10
+        // bg-gradient-to-r from-teal-500 to-sky-500
+        <div className='flex h-screen login'>
+
+            {/* <h1>{props.title}</h1> */}
             {
 
                 props.title === 'Login' ?
-                    <div className="w-full max-w-xs m-auto">
-                        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                    <div className=" w-full max-w-xs m-auto">
+                        <form className="bg-gradient-to-r  from-orange-200 to-amber-200 shadow-md rounded px-8 pt-6 pb-8 mb-4">
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+                                <label className="block text-teal-500 text-lg font-bold mb-2" htmlFor="username">
                                     Username
                                 </label>
                                 <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
                             </div>
                             <div className="mb-6">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                                <label className="block text-teal-500 text-lg font-bold mb-2" htmlFor="password">
                                     Password
                                 </label>
-                                <input className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************" onChange={(e) => setPassword(e.target.value)} />
-                                <p className="text-red-500 text-xs italic">Please choose a password.</p>
+                                <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************" onChange={(e) => setPassword(e.target.value)} />
+                                {/* <p className="text-red-500 text-xs italic">Please choose a password.</p> */}
                             </div>
-                            <div className="flex items-center justify-center">
+                            <div className="flex items-center justify-between">
                                 {/* justify-between if adding the forgot password */}
-                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => handleAction(props.title)}>
+                                <button className="bg-teal-500 hover:bg-teal-700 hover:scale-110 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => handleAction(props.title)}>
                                     Sign In
                                 </button>
-                                <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
-                                    Forgot Password?
-                                </a>
-                                {/* <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
-                            Forgot Password?
-                        </a> */}
-                            </div>
-                            <div className="flex items-center justify-center">
-                                {/* justify-between if adding the forgot password */}
-                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => handleAction('reg')}>
-                                    Click Here to Register
+                                <button type="button" class="inline-block align-baseline font-bold text-base text-teal-500 hover:text-teal-800" onClick={() => handleAction('reg')}>
+                                    Sign Up
                                 </button>
+
                             </div>
+
                         </form>
                         <p className="text-center text-gray-500 text-xs">
                             &copy;2020 Acme Corp. All rights reserved.
@@ -149,26 +145,23 @@ const LoginRegister = (props) => {
                                 <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password2" type="password2" placeholder="******************" onChange={(e) => setPassword2(e.target.value)} />
                             </div>
                         </div>
-                        <div className="flex items-center justify-center">
+                        <div className="flex items-center justify-evenly">
                             {/* justify-between if adding the forgot password */}
                             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => handleAction(props.title)}>
                                 Sign Up
+                            </button>
+                            <button type="button" class="inline-block align-baseline font-bold text-sm text-teal-500 hover:text-teal-800" onClick={() => handleAction('goLog')}>
+                                Log In
                             </button>
                             {/* <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
                             Forgot Password?
                         </a> */}
                         </div>
-                        <div className="flex items-center justify-center">
-                            {/* justify-between if adding the forgot password */}
-                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => handleAction('goLog')}>
-                                Go to Login
 
-                            </button>
-                        </div>
                     </form>
             }
 
-        </>
+        </div>
     )
 }
 
