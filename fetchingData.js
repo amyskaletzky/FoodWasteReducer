@@ -35,7 +35,7 @@ export const getRecipe = async (req, res) => {
         const messages = [];
         messages.push({
             role: "assistant", content: `Write a recipe with
-    ${ingredients}, 'title', 'ingredients' as an array with quantity as string, 'duration' (which is the overall time taken to prepare and cook the meal), 'nutritionalData', 'dietaryRestrictions', 'numOfServings', 'instructions'
+    ${ingredients}, 'title', 'ingredients' as an array with quantity as string, 'duration' (which is the overall time taken to prepare and cook the meal), 'nutritionalData', 'dietaryRestrictions' as a json object without keys just strings, 'numOfServings', 'instructions' where each step is divided by a full stop
     ${dairyFree} ${vegetarian} ${vegan} ${kosher} ${halal} ${diabetes} ${allergies + ' allergy'} ${extras} 
     return as a javascript JSON object (with "" around each key) without const and console.log` });
 
@@ -56,6 +56,8 @@ export const getRecipe = async (req, res) => {
             const img = await ai(title)
             // console.log('fetch data img:', img);
 
+
+
             const newMeal = {
                 title: title,
                 ingredients: JSON.stringify(ingredients),
@@ -68,9 +70,7 @@ export const getRecipe = async (req, res) => {
                 user_id: user_id
             }
             console.log(newMeal)
-            // let res = await axios.post('http://localhost:5002/insert', {
-            //     title, ingredients, instructions, dietary_restrictions: dietaryRestrictions, nutritional_data: nutritionalData, num_of_servings: numOfServings, img, duration, user_id
-            // })
+
             req.body.dietary_restrictions = dietaryRestrictions
             req.body.nutritional_data = nutritionalData
             req.body.num_of_servings = numOfServings
@@ -112,22 +112,30 @@ const ai = async (recipeName) => {
     }
 }
 
-const downloadImg = (imageUrl) => {
+const downloadImg = async (imageUrl) => {
     const parsed = url.parse(imageUrl);
     const img = path.basename(parsed.pathname);
 
     const pathToUploadTo = __dirname + '/imgs/'
 
+    try {
+        const response = await axios.get(imageUrl, { responseType: "stream" })
+        await response.data.pipe(fs.createWriteStream(pathToUploadTo + img));
 
-    axios.get(imageUrl, { responseType: "stream" })
-        .then(response => {
-            // Saving file to working directory
-            response.data.pipe(fs.createWriteStream(pathToUploadTo + img));
-        })
-        .catch(error => {
-            console.log(error);
+        return new Promise((resolve, reject) => {
+            response.data.on('end', () => {
+                console.log('img from downloadimg:', img);
+                resolve(img);
+            });
+            response.data.on('error', (err) => {
+                reject(err);
+            });
         });
+    } catch (err) {
+        console.log(err);
+    }
 
-    console.log('img from downloadimg:', img)
-    return img
+
 }
+// console.log('img from downloadimg:', img)
+// return img

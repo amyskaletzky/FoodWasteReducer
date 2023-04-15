@@ -1,6 +1,10 @@
+import NavBar from "./NavBar"
 const Favourites = (props) => {
     return (
-        <h1>Favourites</h1>
+        <>
+            <NavBar />
+            <h1>Favourites</h1>
+        </>
     )
 }
 export default Favourites

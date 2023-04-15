@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { AppContext, MealContext } from "../App";
 import { Link } from 'react-router-dom';
+import NavBar from "./NavBar";
 import faveBefore from '../imgs/fave-before.png';
 import faveAfter from '../imgs/fave-after.png'
 import axios from "axios";
@@ -41,6 +42,7 @@ const Discover = (props) => {
 
     return (
         <>
+            <NavBar />
             <div className="flex flex-wrap justify-evenly mx-auto bg-violet-900">
                 {
                     meals.map(meal => {
@@ -65,21 +67,7 @@ const Discover = (props) => {
                             })
                         }
 
-                        {/* nutritional data (also ask Ziv) */ }
-                        let nutritionalData = JSON.parse(meal.nutritional_data)
-                        const nutritionKeys = Object.keys(nutritionalData)
 
-                        nutritionalData = nutritionKeys.map(key => {
-                            let value = nutritionalData[key]
-                            if (value.includes(key)) {
-                                value = value.replace(key, '')
-                            }
-
-                            if (key.toLowerCase() === 'calories' && !value.includes('kcal')) {
-                                /\s/.test(value) === true ? value = value + 'kcal' : value = value + ' ' + 'kcal'
-                            }
-                            return value
-                        })
                         {/* mx-auto -> to center */ }
                         {/* <div className="max-w-sm  bg-white rounded-xl shadow-2xl shadow-indigo-900 mt-4 w-48 text-indigo-600 h-40 items-center transform transition-all hover:scale-110 meal-div" key={meal.id} > */ }
                         {/* <div className="flex-row meal-div bg-violet-300 m-6 shadow-lg rounded max-w-sm" key={meal.id} > */ }
@@ -96,7 +84,7 @@ const Discover = (props) => {
                                 </div>
                                 <div className="flex flex-col h-full">
 
-                                    <img src={`imgs/${meal.img}`} />
+                                    <img className="rounded-lg" src={`imgs/${meal.img}`} />
                                     <ul className="list-disc"> Ingredients:
 
                                         {
@@ -146,6 +134,22 @@ export default Discover
 //                                 </ul >
 // <a href="https://www.flaticon.com/free-icons/cutlery" title="cutlery icons">Cutlery icons created by Freepik - Flaticon</a>
 
-    // < p > { meal.dietary_restrictions }</p >
-    //                             <p>{meal.instructions}</p>
-    //                            
+// < p > { meal.dietary_restrictions }</p >
+//                             <p>{meal.instructions}</p>
+//                            
+
+{/* nutritional data (also ask Ziv) */ }
+// let nutritionalData = JSON.parse(meal.nutritional_data)
+// const nutritionKeys = Object.keys(nutritionalData)
+
+// nutritionalData = nutritionKeys.map(key => {
+//     let value = nutritionalData[key]
+//     if (value.includes(key)) {
+//         value = value.replace(key, '')
+//     }
+
+//     if (key.toLowerCase() === 'calories' && !value.includes('kcal')) {
+//         /\s/.test(value) === true ? value = value + 'kcal' : value = value + ' ' + 'kcal'
+//     }
+//     return value
+// })

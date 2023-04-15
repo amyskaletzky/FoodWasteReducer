@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { AppContext } from "../App";
 import { MealContext } from "../App";
 import { useParams } from 'react-router-dom';
+import NavBar from "./NavBar";
 import faveBefore from '../imgs/fave-before.png';
 import faveAfter from '../imgs/fave-after.png'
 import axios from "axios";
@@ -105,6 +106,7 @@ const SpecificRecipe = (props) => {
     
     return (
         <>
+        <NavBar/>
             {(!mealDetails || !ingredients || !nutrition || !nutritionKeys) ? (
                 <div>Loading...</div>
             ) :
