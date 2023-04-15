@@ -45,10 +45,10 @@ const HomePage = (props) => {
         e.preventDefault()
         if (!ingredients) return
         setLoading(true)
-        setShowData(false)
         const res = await CheckIfLoggedIn()
         if (res) {
             const user_id = await getUserDetails()
+            setShowData(false)
 
             try {
                 let response = await axios.post('http://localhost:5002/recipe', {

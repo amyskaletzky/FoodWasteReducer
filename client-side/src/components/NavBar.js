@@ -1,5 +1,7 @@
+import React from 'react'
+import { Transition } from "@headlessui/react";
 import { Link } from 'react-router-dom';
-
+import { useState } from "react";
 const NavBar = (props) => {
     return (
         <nav className="flex items-center justify-between flex-wrap bg-violet-600 p-3">
