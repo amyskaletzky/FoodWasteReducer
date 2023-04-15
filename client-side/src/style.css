@@ -21,3 +21,9 @@ body {
     background-image: url('./imgs/bg-home2.jpg');
     background-size: cover;
 }
+
+.discover {
+    background-image: url('./imgs/pumpkin.jpg');
+    background-size: contain;
+
+}

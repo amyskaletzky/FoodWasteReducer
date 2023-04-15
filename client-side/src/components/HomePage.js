@@ -27,12 +27,11 @@ const HomePage = (props) => {
     const navigate = useNavigate()
 
     const CheckIfLoggedIn = async () => {
-
         try {
             const response = await axios.get('/token');
             console.log('response.data: ', response.data);
             setAccessToken(response.data)
-            return true
+            return response.data
         } catch (err) {
             console.log('err:', err.response.data.msg);
             navigate('/login')
@@ -46,8 +45,9 @@ const HomePage = (props) => {
         if (!ingredients) return
         setLoading(true)
         const res = await CheckIfLoggedIn()
-        if (res) {
-            const user_id = await getUserDetails()
+        console.log('res', res)
+        if (res !== undefined) {
+            const user_id = await getUserDetails(res)
             setShowData(false)
 
             try {
@@ -66,9 +66,8 @@ const HomePage = (props) => {
         }
     }
 
-    const getUserDetails = (req, res) => {
+    const getUserDetails = (accessToken) => {
         try {
-            console.log('hi!');
             const decode = jwt_decode(accessToken.accessToken)
             const user_id = decode.userid
             console.log(user_id);
@@ -122,24 +121,54 @@ const HomePage = (props) => {
                 </form>
 
             </div>
-            <div className='w-full h-full bg-gray-900'>
 
 
-                {
-                    (showData) ?
+            {
+                (showData) ?
 
-                        (
-                            <div className='h-screen'>
-                                <p>{meal.id}</p>
-                                <p>{meal.title}</p>
-                                <p>{meal.duration}</p>
-                                <p>{meal.ingredients}</p>
-                                <p>{meal.num_of_servings}</p>
+                    (
+                        <div className='h-full bg-gray-900'>
+                            <div className='text-orange-200 text-lg h-full'>
+                                <p className='font-semibold text-2xl p-3'>{meal.title}</p>
+                                <div className='flex w-screen justify-between'>
+                                    <div className='flex'>
+                                        <img className='w-7 h-6 ml-6' src={require(`../imgs/deadline.png`)} />
+                                        <p className=''>{meal.duration}</p>
+                                    </div>
+                                    <p className='mr-6'>{meal.num_of_servings} servings</p>
+                                </div>
+                                <div className='flex p-6'>
+                                    <img className='rounded-xl ' src={`../../imgs/${meal.img}`} />
+                                    {/* {
+                                        ingredients = meal.ingredients.map(x => {
+                                            if (typeof x == 'object') {
+                                                const keys = Object.keys(x)
+                                                const ing = `${x[keys[1]]} ${x[keys[0]]} `
+                                                return ing
+                                            } else {
+                                                return x
+                                            }
+                                        })
+
+                                    }
+                                    <ul className="list-disc"> Ingredients:
+
+                                        {
+                                            ingredients.map(ingredient => {
+                                                return (
+                                                    <li>{ingredient}</li>
+                                                )
+                                            })}
+
+                                    </ul> */}
+                                    <p>{meal.ingredients}</p>
+                                </div>
                                 <p>{meal.nutritional_data}</p>
                                 <p>{meal.instructions}</p>
-                                <img src={`../../imgs/${meal.img}`} />
                             </div>
-                        ) : loading ? (
+                        </div>
+                    ) : loading ? (
+                        <div className='h-full bg-gray-900'>
                             <div class="border bg-orange-200 m-7 border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">
                                 <div class="animate-pulse  flex space-x-4">
                                     <div class="flex-1 space-y-6 py-1">
@@ -150,12 +179,12 @@ const HomePage = (props) => {
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                        ) : <></>
+                    ) : <></>
 
 
-                }
-            </div>
+            }
 
         </>
 
