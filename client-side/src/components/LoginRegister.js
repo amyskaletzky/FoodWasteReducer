@@ -57,7 +57,7 @@ const LoginRegister = (props) => {
     return (
         // backdrop-blur-sm bg-opacity-10
         // bg-gradient-to-r from-teal-500 to-sky-500
-        <div className='flex h-screen login'>
+        <div className='flex h-screen login-reg'>
 
             {/* <h1>{props.title}</h1> */}
             {
@@ -96,69 +96,72 @@ const LoginRegister = (props) => {
                     </div>
 
                     :
-
-                    <form className="w-full max-w-lg m-auto">
-                        <div className="flex flex-wrap -mx-3 mb-6">
-                            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
-                                    First Name
-                                </label>
-                                <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} />
-                                <p className="text-red-500 text-xs italic">Please fill out this field.</p>
+                    <div className='flex flex-col w-full justify-center m-2'>
+                        <form className="w-full max-w-lg m-auto bg-gradient-to-r from-orange-200 to-amber-200 shadow-md rounded px-8 pt-6 pb-8 ">
+                            <div className="flex flex-wrap -mx-3 mb-6">
+                                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                    <label className="text-teal-500 block uppercase tracking-wide text-base font-bold mb-2" htmlFor="grid-first-name">
+                                        First Name
+                                    </label>
+                                    <input className="appearance-none block w-full bg-gray-200 text-teal-500 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-first-name" type="text" placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} />
+                                </div>
+                                <div className="w-full md:w-1/2 px-3">
+                                    <label className="block uppercase tracking-wide text-teal-500 text-base font-bold mb-2" htmlFor="grid-last-name">
+                                        Last Name
+                                    </label>
+                                    <input className="appearance-none block w-full bg-gray-200 text-teal-500 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Last Name" onChange={(e) => setLastName(e.target.value)} />
+                                </div>
                             </div>
-                            <div className="w-full md:w-1/2 px-3">
-                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
-                                    Last Name
-                                </label>
-                                <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Last Name" onChange={(e) => setLastName(e.target.value)} />
-                            </div>
-                        </div>
-                        <div className="flex flex-wrap -mx-3 mb-6">
-                            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-username">
-                                    Username
-                                </label>
-                                <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-username" type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
-                                <p className="text-red-500 text-xs italic">Please fill out this field.</p>
-                            </div>
-                            <div className="w-full md:w-1/2 px-3">
-                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-email">
-                                    Email
-                                </label>
-                                <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-email
+                            <div className="flex flex-wrap -mx-3 mb-6">
+                                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                    <label className="block uppercase tracking-wide text-teal-500 text-base font-bold mb-2" htmlFor="grid-username">
+                                        Username
+                                    </label>
+                                    <input className="appearance-none block w-full bg-gray-200 text-teal-500 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-username" type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
+                                </div>
+                                <div className="w-full md:w-1/2 px-3">
+                                    <label className="block uppercase tracking-wide text-teal-500 text-base font-bold mb-2" htmlFor="grid-email">
+                                        Email
+                                    </label>
+                                    <input className="appearance-none block w-full bg-gray-200 text-teal-500 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-email
                                 " type="text" placeholder="example@email.com" onChange={(e) => setEmail(e.target.value)} />
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex flex-wrap -mx-3 mb-6">
-                            <div className="w-full px-3">
-                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
-                                    Password
-                                </label>
-                                <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="password" placeholder="******************" onChange={(e) => setPassword(e.target.value)} />
+                            <div className="flex flex-wrap -mx-3 mb-6">
+                                <div className="w-full px-3">
+                                    <label className="block uppercase tracking-wide text-teal-500 text-base font-bold mb-2" htmlFor="grid-password">
+                                        Password
+                                    </label>
+                                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="password" placeholder="******************" onChange={(e) => setPassword(e.target.value)} />
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex flex-wrap -mx-3 mb-6">
-                            <div className="w-full px-3">
-                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password2">
-                                    Reenter Password
-                                </label>
-                                <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password2" type="password2" placeholder="******************" onChange={(e) => setPassword2(e.target.value)} />
+                            <div className="flex flex-wrap -mx-3 mb-6">
+                                <div className="w-full px-3">
+                                    <label className="block uppercase tracking-wide text-teal-500 text-base font-bold mb-2" htmlFor="grid-password2">
+                                        Reenter Password
+                                    </label>
+                                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password2" type="password2" placeholder="******************" onChange={(e) => setPassword2(e.target.value)} />
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex items-center justify-evenly">
-                            {/* justify-between if adding the forgot password */}
-                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => handleAction(props.title)}>
-                                Sign Up
-                            </button>
-                            <button type="button" class="inline-block align-baseline font-bold text-sm text-teal-500 hover:text-teal-800" onClick={() => handleAction('goLog')}>
-                                Log In
-                            </button>
-                            {/* <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+                            <div className="flex items-center justify-evenly">
+                                {/* justify-between if adding the forgot password */}
+                                <button className="bg-teal-500 hover:bg-teal-700 hover:scale-110 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => handleAction(props.title)}>
+                                    Sign Up
+                                </button>
+                                <button type="button" class="inline-block align-baseline font-bold text-base text-teal-500 hover:text-teal-800" onClick={() => handleAction('goLog')}>
+                                    Log In
+                                </button>
+                                {/* <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
                             Forgot Password?
                         </a> */}
-                        </div>
+                            </div>
 
-                    </form>
+                        </form>
+                        <p className="text-center text-gray-500 text-sm">
+                            &copy;2020 Acme Corp. All rights reserved.
+                        </p>
+                    </div>
+
             }
 
         </div>
@@ -166,3 +169,4 @@ const LoginRegister = (props) => {
 }
 
 export default LoginRegister
+    // < p className = "text-red-500 text-xs italic" > Please fill out this field.</p >
