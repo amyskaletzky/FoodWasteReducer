@@ -43,12 +43,12 @@ export const login = async (req, res) => {
         const username = user[0].username
 
         const accessToken = jwt.sign({ userid, username }, process.env.ACCESS_TOKEN_SECRET, {
-            expiresIn: '6000s' // change to 5 minutes later on
+            expiresIn: '1200s' // change to 5 minutes later on
         })
 
         res.cookie('accessToken', accessToken, {
             httpOnly: true,
-            maxAge: 6000 * 1000 // also change to 5 minutes later on
+            maxAge: 1200 * 1000 // also change to 5 minutes later on
         })
 
         res.json({ accessToken });
