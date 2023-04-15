@@ -4,10 +4,20 @@
     margin: 0;
 }
 
+body {
+    background: #111827;
+}
+
 .login-reg {
     /* background-image: url('imgs/bg-1.avif'); */
     /* background-image: url('imgs/bg-2.jpg'); */
     background-image: url('imgs/bg-3.jpg');
     background-size: cover;
     /* background-repeat: no-repeat; */
+}
+
+.home {
+    background: #111827;
+    background-image: url('./imgs/bg-home2.jpg');
+    background-size: cover;
 }

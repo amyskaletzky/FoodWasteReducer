@@ -5,62 +5,26 @@ import { useState } from "react";
 import hotpot from '../imgs/hot-pot.png'
 const NavBar = (props) => {
     const [isOpen, setIsOpen] = useState(false);
-    // 
 
     return (
         <div>
-            <nav className="bg-teal-500 mb-5">
+            <nav className=" mb-5">
                 <div className="max-w-7xl mx-auto pr-4 sm:pr-6 lg:pr-8">
-                    {/* <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> */}
-                    <div className="flex items-center justify-between h-16">
-                        <div className="flex items-center">
-                            <div className="flex-shrink-0">
+                    <div className="flex items-center justify-center h-16">
+                        {/* <div className="flex items-center"> */}
+                        {/* <div className="flex-shrink-0">
                                 <img className=" w-25" src={hotpot} />
 
-                            </div>
-                            <div className="hidden md:block">
-                                <div className="ml-10 flex items-baseline space-x-4">
-                                    <Link to='/' className=" hover:text-orange-300 text-orange-100 px-3 py-2 rounded-md text-base font-medium"> Home</Link>
-                                    <Link to='/create_party' className=" hover:text-teal-700 text-orange-100 px-3 py-2 rounded-md text-base font-medium"> Create Party</Link>
-                                    <Link to='' className="hover:text-teal-700 text-orange-100 px-3 py-2 rounded-md text-base font-medium"> Your Parties</Link>
-                                    <Link to='' className="hover:text-teal-700 text-orange-100 px-3 py-2 rounded-md text-base font-medium"> About Us</Link>
-                                    {/* <a
-                    href="#"
-                    className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Home
-                  </a> */}
-
-                                    {/* <a
-                    href="#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Create Party
-                  </a> */}
-
-                                    {/* <a
-                    href="#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Your Parties
-                  </a> */}
-
-                                    {/* <a
-                    href="#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    About Us
-                  </a> */}
-
-                                    {/* <a
-                    href="#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Reports
-                  </a> */}
-                                </div>
+                            </div> */}
+                        <div className="hidden md:block">
+                            <div className="ml-10 flex items-baseline space-x-4">
+                                <Link to='/' className="duration-300 bg-orange-200 hover:bg-orange-400 hover:text-slate-100 text-zinc-900 px-3 py-2 rounded-md text-base font-medium m-4">Home</Link>
+                                <Link to='/favourites' className="duration-300 bg-orange-200 hover:bg-orange-400 hover:text-slate-100 text-zinc-900 px-3 py-2 rounded-md text-base font-medium m-4">Favourites</Link>
+                                <Link to='/discover' className="duration-300 bg-orange-200 hover:bg-orange-400 hover:text-slate-100 text-zinc-900 px-3 py-2 rounded-md text-base font-medium m-4">Discover</Link>
+                                {/* <Link to='' className="hover:text-teal-700 text-orange-100 px-3 py-2 rounded-md text-base font-medium"> About Us</Link> */}
                             </div>
                         </div>
+                        {/* </div> */}
                         <div className="-mr-2 flex md:hidden">
                             <button
                                 onClick={() => setIsOpen(!isOpen)}
@@ -124,40 +88,7 @@ const NavBar = (props) => {
                                 <Link to='/create_party' className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"> Create Party</Link>
                                 <Link to='' className="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"> Your Parties</Link>
                                 <Link to='' className="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"> About Us</Link>
-                                {/* <a
-                  href="#"
-                  className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Home
-                </a>
 
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Create Party
-                </a>
-
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Your Parties
-                </a>
-
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                    About Us
-                </a> */}
-
-                                {/* <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Reports
-                </a> */}
                             </div>
                         </div>
                     )}
