@@ -60,23 +60,31 @@ const Discover = (props) => {
                             <>
                                 {
                                     (!meal || !meal.title || !meal.ingredients || !meal.img || !meal.dietary_restrictions) ? (
-                                        <div>Loading...</div>
+                                        <div className="text-xl">Loading...</div>
                                     ) :
                                         (
-                                            <div className="text-orange-200 flex flex-col px-8 max-w-md w-full m-6 bg-gray-800 bg-clip-padding backdrop-filter backdrop-blur-2xl bg-opacity-60 border border-gray-700 rounded-xl shadow-lg space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6 " key={meal.id}>
-                                                <div className="w-full flex justify-between mt-2">
-                                                    <p className="title text-xl">{meal.title}</p>
-                                                    <button> <img className="favicon-icon" src={faveBefore} /></button>
+                                            <div className="text-orange-200 flex flex-col px-4 max-w-md w-full m-6 bg-gray-900 bg-clip-padding backdrop-filter backdrop-blur-2xl bg-opacity-40 border border-gray-700 rounded-xl shadow-lg space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6 " key={meal.id}>
+                                                <div className="w-full flex flex-col justify-center">
+                                                    <p className=" text-3xl">{meal.title}</p>
+                                                    <p className="text-lg">Created by <span className="text-orange-600">{meal.food_reducer_user?.username}</span></p>
+
+                                                    {/* <button> <img className="favicon-icon" src={faveBefore} /></button> */}
                                                 </div>
 
                                                 <div className="flex w-full justify-between">
-                                                    <p className="">{meal.duration}</p>
-                                                    <p>{meal.num_of_servings} servings</p>
+                                                    <div className="flex">
+                                                        <img className='w-7 h-7 mr-2' src={require(`../imgs/time.png`)} />
+                                                        <p className="">{meal.duration}</p>
+                                                    </div>
+                                                    <div className="flex">
+                                                        <img className='w-7 h-6 mr-2' src={require(`../imgs/servings.png`)} />
+                                                        <p>{meal.num_of_servings} servings</p>
+                                                    </div>
                                                 </div>
                                                 <div className="flex flex-col h-full">
 
                                                     <img className="rounded-lg" src={`imgs/${meal.img}`} />
-                                                    <ul className="list-disc text-xl my-3"> Ingredients:
+                                                    {/* <ul className="list-disc text-xl my-3"> Ingredients:
 
                                                         {
                                                             ingredients.map(ingredient => {
@@ -85,10 +93,19 @@ const Discover = (props) => {
                                                                 )
                                                             })}
 
-                                                    </ul>
-
-                                                    <p className="m-3">Created by User:{meal.food_reducer_user?.username}</p>
-                                                    <Link className="rounded-full bg-orange-300 p-3 text-slate-800 text-lg transform transition-all mt-auto hover:scale-105" to={`/meal/${meal.id}`}>Click to see recipe</Link>
+                                                    </ul> */}
+                                                    {/* Ingredients */}
+                                                    <div className='flex flex-col justify-center mb-1.5'>
+                                                        <p className=' text-2xl text-orange-200 rounded text-center'>Ingredients</p>
+                                                        {
+                                                            ingredients.map((i, index) => {
+                                                                return (
+                                                                    <p className=' bg-slate-800 text-lg text-orange-200 rounded m-1 px-1' >{i}</p>
+                                                                )
+                                                            })
+                                                        }
+                                                    </div>
+                                                    <Link className="rounded-full bg-orange-300 p-3 text-slate-800 text-lg transform transition-all mt-auto hover:scale-105 hover:bg-orange-400 hover:text-slate-100" to={`/meal/${meal.id}`}>Click to see recipe</Link>
 
                                                 </div>
                                             </div>)
