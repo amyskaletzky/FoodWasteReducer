@@ -34,9 +34,10 @@ export const getRecipe = async (req, res) => {
 
         const messages = [];
         messages.push({
+            // ''+ allergies + ' allergy'
             role: "assistant", content: `Write a recipe with
-    ${ingredients}, 'title', 'ingredients' as an array with quantity as string, 'duration' (which is the overall time taken to prepare and cook the meal), 'nutritionalData', 'dietaryRestrictions' as a json object without keys just strings, 'numOfServings', 'instructions' where each step is divided by a full stop
-    ${dairyFree} ${vegetarian} ${vegan} ${kosher} ${halal} ${diabetes} ${allergies + ' allergy'} ${extras} 
+    ${ingredients}, ${dairyFree} ${vegetarian} ${vegan} ${kosher} ${halal} ${diabetes} ${allergies ? `(WITHOUT ${allergies})` : ''} ${extras}, 'title', 'ingredients' as an array with quantity as string, 'duration' (which is the overall time taken to prepare and cook the meal), 'nutritionalData' (make sure that calories are written with 'kcal' and no repetitions like {"calories": "123 calories"}), 'dietaryRestrictions'( as a json object without keys just strings, make sure to only mention if kosher, halal, vegan, vegetarian, dairy free, and/or contains an allergen and specify, as well as write down if user has mentioned a specific allergy and add '-free' after (for ex: peanuts are the allergy, write 'peanut-free')), 'numOfServings', 'instructions' as an array of strings (not numbered)
+    
     return as a javascript JSON object (with "" around each key) without const and console.log` });
 
         try {

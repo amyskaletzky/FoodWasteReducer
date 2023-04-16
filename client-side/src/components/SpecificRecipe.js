@@ -19,134 +19,127 @@ const SpecificRecipe = (props) => {
 
     useEffect(() => {
         const getMeal = async () => {
-            console.log('specific RECIPE: ', id)
             const response = await axios.get(`/meal/${id}`)
             console.log('rfgnj:',response.data);
             setMealDetails(response.data)
             const parseIng = JSON.parse(response.data.ingredients)
-            console.log('ing', parseIng); console.log(Array.isArray(parseIng))
             if (!Array.isArray(parseIng)) {
                 let arr = []
                 arr.push(Object.values(parseIng))
                 setIngredients([...arr])
-                console.log('arr:', arr);
             } else {
-                console.log('parseIng: ', parseIng);
                 setIngredients(parseIng)
             }
-            // (Array.isArray(JSON.parse(response.data.ingredients))) ? setIngredients(JSON.parse(response.data.ingredients)) : setIngredients(new Array().push(JSON.parse(response.data.ingredients)))
             setNutrition(JSON.parse(response.data.nutritional_data))
             setNutritionKeys(Object.keys(JSON.parse(response.data.nutritional_data)))
-            // setDietary(JSON.parse())
-            // console.log('meal DEETS:', mealDetails)
+   
         }
         getMeal()
     }, [])
 
   
-    //         let nutritionalData = JSON.parse(mealDetails.nutritional_data)
-    //         setNutritionKeys(Object.keys(nutritionalData))
-
-    //         setNutrition(nutritionKeys.map(key => {
-    //             let value = nutritionalData[key]
-    //             if (value.includes(key)) {
-    //                 value = value.replace(key, '')
-    //             }
-
-    //             if (key === 'calories' && !va lue.includes('kcal')) {
-    //                 /\s/.test(value) === true ? value = value + 'kcal' : value = value + ' ' + 'kcal'
-    //             }
-    //             return value
-    //         }))
-
-    //     }
-
-    // }, [mealDetails])
-
-    // const ingredients = mealDetails.ingredients ? JSON.parse(mealDetails.ingredients).map(x => {
-    //     if (typeof x == 'object') {
-    //         const keys = Object.keys(x)
-    //         const ing = `${x[keys[1]]} ${x[keys[0]]} `
-    //         return ing
-    //     } else {
-    //         return x
-    //     }
-    // }) : [];
-
-    // const nutrition = mealDetails.nutritional_data ? Object.keys(JSON.parse(mealDetails.nutritional_data)).map(key => {
-    //     let value = JSON.parse(mealDetails.nutritional_data)[key]
-    //     if (value.includes(key)) {
-    //         value = value.replace(key, '')
-    //     }
-
-    //     if (key === 'calories' && !value.includes('kcal')) {
-    //         /\s/.test(value) === true ? value = value + 'kcal' : value = value + ' ' + 'kcal'
-    //     }
-    //     return value
-    // }) : [];
-
-    // const nutritionKeys = mealDetails.nutritional_data ? Object.keys(JSON.parse(mealDetails.nutritional_data)) : [];
-
-
-    // useEffect(() => {
-    //     if (mealDetails && ingredients) {
-    //         // let i = JSON.parse(ingredients)
-    //         setIngredients(ingredients.map(x => {
-    //             if (typeof x == 'object') {
-    //                 const keys = Object.keys(x)
-    //                 const ing = `${x[keys[1]]} ${x[keys[0]]} `
-    //                 console.log('ERIJSNEIBR:',ing);
-    //                 return ing
-    //             } else {
-    //                 return x
-    //             }
-    //         }))
-    //     }
-    // }, [])
-    
     return (
-        <>
+        <div className="home text-orange-200">
         <NavBar/>
-            {(!mealDetails || !ingredients || !nutrition || !nutritionKeys) ? (
+            {(!mealDetails || !ingredients || !nutrition || !nutritionKeys || !mealDetails.dietary_restrictions || !mealDetails.num_of_servings || !mealDetails.instructions || !mealDetails.duration || !mealDetails.img) ? (
                 <div>Loading...</div>
             ) :
-                (
-                    <div>
-                        <h1>Specific recipe</h1>
-                        <p>{mealDetails.title}</p>
-                        <p>{mealDetails.duration}</p>
-                        <ul className="list-disc"> Ingredients:
+                (<div className=' '>
 
-                               { ingredients.map(ingredient => {
-                                    return (
-                            <li>{ingredient}</li>
-                            )
-                                })} 
-                        </ul>
-                        <ul> Nutrition:
-                            {/* {
-                              
-                                nd = nutritionKeys.map((key,i) => {
-                                    let value = nutrition[key]
-                                    if (value.includes(key)) {
-                                        value = value.replace(key, '')
+                    <div className=' home-cut h-screen'>
+                        {/* Title, dietary restrictions, number of servings and duration */}
+                        <div className='flex flex-col text-orange-200 text-lg'>
+                            <p className='mt-3 text-2xl'>{mealDetails.title}</p>
+                            <div className='flex justify-evenly'>
+                                <div className='flex '>
+                                    <img className='w-7 h-7 mr-2' src={require(`../imgs/time.png`)} />
+                                    <p className=''>{mealDetails.duration}</p>
+                                </div>
+                                <div className='flex justify-center  mt-6'>
+                                    {
+                                        JSON.parse(mealDetails.dietary_restrictions).map(d =>
+                                        (
+                                            <div className='bg-orange-200 p-1.5 m-1.5 rounded '>
+                                                <p className='text-slate-800'>{d}</p>
+                                            </div>
+                                        )
+                                        )
                                     }
+                                </div>
+                                <div className='flex '>
+                                    <img className='w-7 h-6 mr-2' src={require(`../imgs/servings.png`)} />
+                                    <p className='mr-6'>{mealDetails.num_of_servings} servings</p>
+                                </div>
+                            </div>
+                        </div>
 
-                                    if (key === 'calories' && !value.includes('kcal')) {
-                                        /\s/.test(value) === true ? value = value + 'kcal' : value = value + ' ' + 'kcal'
-                                    }
-                                    return (
-                                        <li key={i}>{key}: {value}</li>
-                                    )
-                                })
+                        <div className='flex w-full justify-evenly'>
+                            {/* Meal Image */}
+                            <div className='bg-slate-800 rounded-full rounded-b-lg p-5 h-1/2'>
+                                <div className='bg-orange-200 rounded-full rounded-b-lg p-5 h-1/2'>
+                                    <img className='rounded-full rounded-b-lg' src={`../../imgs/${mealDetails.img}`} />
+                                </div>
+                            </div>
 
 
-                            } */}
-                        </ul>
-                  
-                           
-
+                            {/* Ingredients */}
+                            <div className='flex flex-col justify-center'>
+                                <p className=' text-2xl text-orange-200 rounded text-center'>Ingredients</p>
+                                {
+                                    ingredients.map((i, index) => {
+                                        return (
+                                            <p className=' bg-slate-800 text-lg text-orange-200 rounded m-1 px-1' >{i}</p>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div>
                     </div>
+                    <div className='home-rev p-8 ' >
+                        <div className='flex justify-around'>
+
+                            {/* Nutritional Data */}
+                            <div className='flex flex-col'>
+                                <p className='text-orange-200 text-3xl mb-1'>Nutritional Data</p>
+                                {
+                                    <div className='flex flex-col bg-orange-200 rounded '>
+                                        {
+                                            Object.keys(nutrition).map(key =>
+                                                (
+                                                    <div className='flex text-lg bg-slate-800 text-orange-200 rounded m-1.5 p-1.5 flex-grow-1'>
+                                                        <p className='mr-8 ' >{key}</p>
+                                                        <p className='ml-auto' >{nutrition[key]}</p>
+                                                    </div>
+                                                )
+                                                )
+                                        }
+                                    </div>
+
+                                }
+                            </div>
+                            {/* instructions */}
+                            <div className=' bg-gray-900 text-orange-200 rounded bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30 border border-gray-100 p-2 ml-1.5'>
+                                <p className='  text-3xl mb-1'>Instructions</p>
+                                {
+                                    typeof mealDetails.instructions === 'object' ? mealDetails.instructions.map((inst, index) => (
+                                        <div className=' '>
+                                            <p className='text-xl'>Step {index + 1}</p>
+                                            <p className='text-lg'>{inst}</p>
+                                        </div>
+                                    )) : JSON.parse(mealDetails.instructions).map((inst, index) => (
+                                        <div>
+                                            <p className='text-xl'>Step {index + 1}</p>
+                                            <p className='text-lg'>{inst}</p>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                   
                 )
 
             }
@@ -165,7 +158,7 @@ const SpecificRecipe = (props) => {
                 </ul> */}
                 {/* <p>{mealDetails}</p> */}
             </div>
-        </>
+        </div>
     )
 
 }
@@ -314,3 +307,57 @@ export default SpecificRecipe
     //     )
     // }
     // }, [mealDetails])
+
+    // REALLLLLL
+
+//  AERLIJGAERKJGERG
+//                     <div>
+//                         <p className="text-3xl">{mealDetails.title}</p>
+//                         <div className="flex text-lg justify-evenly">
+//                             <p>{mealDetails.duration}</p>
+//                             <p>{mealDetails.num_of_servings} servings</p>
+//                         </div>
+//                         <div className="m-1.5 flex justify-evenly"> 
+//                             <div className=" flex flex-col px-8 max-w-sm w-full m-6 bg-gray-900 bg-clip-padding backdrop-filter backdrop-blur-2xl bg-opacity-40 border border-gray-700 rounded-xl shadow-lg space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6">
+//                             <p className=" text-2xl  ">Ingredients</p>
+
+//                                { ingredients.map(ingredient => {
+//                                     return (
+//                                         <p className="text-lg">{ingredient}</p>
+//                             )
+//                                 })} 
+//                             </div>
+//                             {/* <div className=" flex flex-col px-8 max-w-sm w-full m-6 bg-gray-900 bg-clip-padding backdrop-filter backdrop-blur-2xl bg-opacity-20 border border-gray-700 rounded-xl shadow-lg space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6">
+//                                 <p className="text-2xl">Nutrition:</p>
+                               
+//                             </div> */}
+
+// <div className='flex flex-col  '>
+//     <p className='text-orange-200 text-3xl mb-1'>Nutritional Data</p>
+//     {
+//         <div className='flex flex-col bg-orange-200 rounded '>
+//             {
+//                 Object.keys(nutrition).map(key =>
+//                 (
+//                     <div className='flex text-lg bg-slate-800 text-orange-200 rounded m-1.5 p-1.5 flex-grow-1'>
+//                         <p className='mr-8 ' >{key}</p>
+//                         <p className='ml-auto' >{nutrition[key]}</p>
+//                     </div>
+//                 )
+//                 )
+//             }
+//         </div>
+
+//     }
+// </div>
+//                         </div >
+//     <div>
+//         {
+
+//         }
+//         <p>{mealDetails.instructions}</p>
+//     </div>
+                      
+                           
+
+//                     </div > 
