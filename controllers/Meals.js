@@ -67,10 +67,39 @@ export const getMealsAndUsername = async (req, res) => {
 export const getMealById = async (req, res) => {
     console.log('controller:', req.params)
     try {
-        const meal = await Meals.findByPk(req.params.id)
+        const meal = await Meals.findByPk(req.params.id, {
+            attributes: [
+                'id',
+                'title',
+                'duration',
+                'ingredients',
+                'instructions',
+                'nutritional_data',
+                'dietary_restrictions',
+                'img',
+                'num_of_servings'
+            ],
+            include: [
+                {
+                    model: Users,
+                    attributes: ['username']
+                }
+            ]
+        })
         console.log('meal:', meal.dataValues)
         res.json(meal.dataValues)
     } catch (err) {
         console.log(err.response);
     }
 }
+
+// export const getMealById = async (req, res) => {
+//     console.log('controller:', req.params)
+//     try {
+//         const meal = await Meals.findByPk(req.params.id)
+//         console.log('meal:', meal.dataValues)
+//         res.json(meal.dataValues)
+//     } catch (err) {
+//         console.log(err.response);
+//     }
+// }
