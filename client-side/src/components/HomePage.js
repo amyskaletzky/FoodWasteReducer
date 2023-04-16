@@ -192,7 +192,7 @@ const HomePage = (props) => {
                                                     Object.keys(JSON.parse(meal.nutritional_data)).map(key =>
                                                     (
                                                         <div className='flex text-lg bg-slate-800 text-orange-200 rounded m-1.5 p-1.5 flex-grow-1'>
-                                                            <p className='mr-8 ' >{key}</p>
+                                                            <p className='mr-8 text-orange-400' >{key}</p>
                                                             <p className='ml-auto' >{JSON.parse(meal.nutritional_data)[key]}</p>
                                                         </div>
                                                     )
@@ -208,12 +208,12 @@ const HomePage = (props) => {
                                         {
                                             typeof meal.instructions === 'object' ? meal.instructions.map((inst, index) => (
                                                 <div className=' '>
-                                                    <p className='text-xl'>Step {index + 1}</p>
+                                                    <p className='text-xl'>Step <span className='text-orange-400 '>{index + 1}</span></p>
                                                     <p className='text-lg'>{inst}</p>
                                                 </div>
                                             )) : JSON.parse(meal.instructions).map((inst, index) => (
                                                 <div>
-                                                    <p className='text-xl'>Step {index + 1}</p>
+                                                    <p className='text-xl'>Step <span className='text-orange-400 '>{index + 1}</span></p>
                                                     <p className='text-lg'>{inst}</p>
                                                 </div>
                                             ))
@@ -229,7 +229,7 @@ const HomePage = (props) => {
                             <div className="border bg-orange-200 m-7 border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">
                                 <div className="animate-pulse  flex space-x-4">
                                     <div className="flex-1 space-y-6 py-1">
-                                        <div className="h-7 text-orange-100 bg-gray-900 rounded">Loading Recipe...</div>
+                                        <div className="h-7 text-orange-100 text-xl bg-gray-900 rounded">Loading Recipe...</div>
                                         <div className="space-y-3 flex justify-center">
                                             <img className='rounded-full w-36' src={require('../imgs/loading-gif.gif')} alt="animated GIF" />
                                         </div>
