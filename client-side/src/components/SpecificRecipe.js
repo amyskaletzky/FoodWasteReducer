@@ -46,7 +46,7 @@ const SpecificRecipe = (props) => {
             ) :
                 (<div className=' '>
 
-                    <div className=' home-cut h-screen'>
+                    <div className=' home-cut'>
                         {/* Title, dietary restrictions, number of servings and duration */}
                         <div className='flex flex-col text-orange-200 text-lg'>
                             <p className='mt-3 text-4xl'>{mealDetails.title}</p>
@@ -56,7 +56,7 @@ const SpecificRecipe = (props) => {
                                     <img className='w-7 h-7 mr-2' src={require(`../imgs/time.png`)} />
                                     <p className=''>{mealDetails.duration}</p>
                                 </div>
-                                <div className='flex justify-center  mt-6'>
+                                <div className='flex justify-center  mt-5'>
                                     {
                                         JSON.parse(mealDetails.dietary_restrictions).map(d =>
                                         (
@@ -74,7 +74,7 @@ const SpecificRecipe = (props) => {
                             </div>
                         </div>
 
-                        <div className='flex w-full justify-evenly'>
+                        <div className='flex w-full justify-evenly mb-10'>
                             {/* Meal Image */}
                             <div className='bg-slate-800 rounded-full rounded-b-lg p-5 h-1/2'>
                                 <div className='bg-orange-200 rounded-full rounded-b-lg p-5 h-1/2'>
@@ -108,7 +108,7 @@ const SpecificRecipe = (props) => {
                                             Object.keys(nutrition).map(key =>
                                                 (
                                                     <div className='flex text-lg bg-slate-800 text-orange-200 rounded m-1.5 p-1.5 flex-grow-1'>
-                                                        <p className='mr-8 ' >{key}</p>
+                                                        <p className='mr-8 text-orange-400 ' >{key}</p>
                                                         <p className='ml-auto' >{nutrition[key]}</p>
                                                     </div>
                                                 )
@@ -120,16 +120,16 @@ const SpecificRecipe = (props) => {
                             </div>
                             {/* instructions */}
                             <div className=' bg-gray-900 text-orange-200 rounded bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30 border border-gray-100 p-2 ml-1.5'>
-                                <p className='  text-3xl mb-1'>Instructions</p>
+                                <p className=' text-3xl mb-1'>Instructions</p>
                                 {
                                     typeof mealDetails.instructions === 'object' ? mealDetails.instructions.map((inst, index) => (
                                         <div className=' '>
-                                            <p className='text-xl'>Step {index + 1}</p>
-                                            <p className='text-lg'>{inst}</p>
+                                            <p className='text-xl'>Step <span className="text-orange-400">{index + 1}</span></p>
+                                            <p className='text-lg '>{inst}</p>
                                         </div>
                                     )) : JSON.parse(mealDetails.instructions).map((inst, index) => (
                                         <div>
-                                            <p className='text-xl'>Step {index + 1}</p>
+                                            <p className='text-xl text-orange-600'>Step <span className="text-orange-400">{index + 1}</span></p>
                                             <p className='text-lg'>{inst}</p>
                                         </div>
                                     ))
