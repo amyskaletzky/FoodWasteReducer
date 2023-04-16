@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Voga';
+    src: url('../public/fonts/Voga-Medium.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
     box-sizing: border-box;
     padding: 0;
@@ -6,6 +13,9 @@
 
 body {
     background: #111827;
+    font-family: 'Voga', sans-serif;
+    letter-spacing: 0.1rem;
+    font-weight: bold;
 }
 
 .login-reg {
@@ -19,6 +29,18 @@ body {
 .home {
     background: #111827;
     background-image: url('./imgs/bg-home2.jpg');
+    background-size: cover;
+}
+
+.home-rev {
+    background: #111827;
+    background-image: url('./imgs/bg-home-rev.jpg');
+    background-size: cover;
+}
+
+.home-cut {
+    background: #111827;
+    background-image: url('./imgs/bg-home-cut.jpg');
     background-size: cover;
 }
 

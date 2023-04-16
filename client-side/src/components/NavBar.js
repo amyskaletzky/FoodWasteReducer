@@ -18,9 +18,9 @@ const NavBar = (props) => {
                             </div> */}
                         <div className="hidden md:block">
                             <div className="ml-10 flex items-baseline space-x-4">
-                                <Link to='/' className="duration-300 bg-orange-200 hover:bg-orange-400 hover:text-slate-100 text-zinc-900 px-3 py-2 rounded-md text-base font-medium m-4">Home</Link>
-                                <Link to='/favourites' className="duration-300 bg-orange-200 hover:bg-orange-400 hover:text-slate-100 text-zinc-900 px-3 py-2 rounded-md text-base font-medium m-4">Favourites</Link>
-                                <Link to='/discover' className="duration-300 bg-orange-200 hover:bg-orange-400 hover:text-slate-100 text-zinc-900 px-3 py-2 rounded-md text-base font-medium m-4">Discover</Link>
+                                <Link to='/' className="duration-300 bg-orange-200 hover:bg-orange-400 hover:text-slate-100 text-zinc-900 px-3 py-2 rounded-md text-xl m-4">Home</Link>
+                                <Link to='/login' className="duration-300  bg-orange-200 hover:bg-orange-400 hover:text-slate-100 text-zinc-900 px-3 py-2 rounded-md text-xl  m-4">Login</Link>
+                                <Link to='/discover' className="duration-300 bg-orange-200 hover:bg-orange-400 hover:text-slate-100 text-zinc-900 px-3 py-2 rounded-md text-xl  m-4">Discover</Link>
                                 {/* <Link to='' className="hover:text-teal-700 text-orange-100 px-3 py-2 rounded-md text-base font-medium"> About Us</Link> */}
                             </div>
                         </div>
