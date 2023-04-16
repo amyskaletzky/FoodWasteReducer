@@ -41,15 +41,16 @@ const SpecificRecipe = (props) => {
     return (
         <div className="home text-orange-200">
         <NavBar/>
-            {(!mealDetails || !ingredients || !nutrition || !nutritionKeys || !mealDetails.dietary_restrictions || !mealDetails.num_of_servings || !mealDetails.instructions || !mealDetails.duration || !mealDetails.img) ? (
-                <div>Loading...</div>
+            {(!mealDetails || !ingredients || !nutrition || !nutritionKeys || !mealDetails.dietary_restrictions || !mealDetails.num_of_servings || !mealDetails.instructions || !mealDetails.duration || !mealDetails.img || !mealDetails.food_reducer_user.username) ? (
+                <div className="m-2 text-xl">Loading...</div>
             ) :
                 (<div className=' '>
 
                     <div className=' home-cut h-screen'>
                         {/* Title, dietary restrictions, number of servings and duration */}
                         <div className='flex flex-col text-orange-200 text-lg'>
-                            <p className='mt-3 text-2xl'>{mealDetails.title}</p>
+                            <p className='mt-3 text-4xl'>{mealDetails.title}</p>
+                            <p className="text-xl mt-2">Created by <span className="text-orange-600">{mealDetails.food_reducer_user.username}</span></p>
                             <div className='flex justify-evenly'>
                                 <div className='flex '>
                                     <img className='w-7 h-7 mr-2' src={require(`../imgs/time.png`)} />
