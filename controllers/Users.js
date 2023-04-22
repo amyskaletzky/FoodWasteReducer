@@ -87,3 +87,10 @@ export const register = async (req, res) => {
         res.status(403).json({ msg: 'Failed to register, please check all fields and try again' })
     }
 }
+
+export const logOut = (req, res) => {
+    const accessToken = req.cookies.accessToken;
+    if (!accessToken) return res.status(204).json({ msg: 'cleared' })
+    res.clearCookie('accessToken');
+    res.status(200).json({ msg: 'cleared' });
+}
