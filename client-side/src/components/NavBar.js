@@ -2,7 +2,6 @@ import React from 'react'
 import { Transition } from "@headlessui/react";
 import { Link } from 'react-router-dom';
 import { useState } from "react";
-import hotpot from '../imgs/hot-pot.png'
 const NavBar = (props) => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -11,17 +10,14 @@ const NavBar = (props) => {
             <nav className=" mb-5">
                 <div className="max-w-7xl mx-auto pr-4 sm:pr-6 lg:pr-8">
                     <div className="flex items-center justify-center h-16">
-                        {/* <div className="flex items-center"> */}
-                        {/* <div className="flex-shrink-0">
-                                <img className=" w-25" src={hotpot} />
 
-                            </div> */}
                         <div className="hidden md:block">
                             <div className="ml-10 flex items-baseline space-x-4">
                                 <Link to='/' className="duration-300 bg-orange-200 hover:bg-orange-400 hover:text-slate-100 text-zinc-900 px-3 py-2 rounded-md text-xl m-4">Home</Link>
                                 <Link to='/login' className="duration-300  bg-orange-200 hover:bg-orange-400 hover:text-slate-100 text-zinc-900 px-3 py-2 rounded-md text-xl  m-4">Login</Link>
                                 <Link to='/discover' className="duration-300 bg-orange-200 hover:bg-orange-400 hover:text-slate-100 text-zinc-900 px-3 py-2 rounded-md text-xl  m-4">Discover</Link>
-                                {/* <Link to='' className="hover:text-teal-700 text-orange-100 px-3 py-2 rounded-md text-base font-medium"> About Us</Link> */}
+                                {/* <Link to='/discover' className="duration-300 bg-orange-200 hover:bg-orange-400 hover:text-slate-100 text-zinc-900 px-3 py-2 rounded-md text-xl  m-4">Discover</Link> */}
+                                {/* <button type='button' className='text-lg' onClick={()=>logOut()}>Log Out</button> */}
                             </div>
                         </div>
                         {/* </div> */}

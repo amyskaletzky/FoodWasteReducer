@@ -35,5 +35,6 @@ router.get('/token', VerifyToken, (req, res) => {
 
     res.status(200).json({ accessToken })
 })
+// router.delete('/logout', logOut)
 
 export default router;
