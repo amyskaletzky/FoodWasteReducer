@@ -27,11 +27,11 @@ app.listen(process.env.PORT || 8080, () => {
 
 // Have Node serve the files for our built React app
 // app.use(express.static(path.resolve(__dirname, "./client/build")));
-app.use(express.static(path.join(__dirname, "client/build")));
+app.use(express.static(path.join(__dirname, "client-side/build")));
 
 // All other GET requests not handled before will return our React app
 app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "./client-side/build", "index.html"));
 });
 
 
