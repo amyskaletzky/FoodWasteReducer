@@ -83,7 +83,7 @@ const Discover = (props) => {
                                                 </div>
                                                 <div className="flex flex-col h-full">
 
-                                                    <img className="rounded-lg" src={`imgs/${meal.img}`} />
+                                                    <img className="rounded-lg" src={`imgs/${meal.img}`} loading="lazy" />
                                                     {/* <ul className="list-disc text-xl my-3"> Ingredients:
 
                                                         {
