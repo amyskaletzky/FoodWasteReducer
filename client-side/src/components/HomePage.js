@@ -53,7 +53,7 @@ const HomePage = (props) => {
             setShowData(false)
 
             try {
-                let response = await axios.post('http://localhost:5002/recipe', {
+                let response = await axios.post('/recipe', {
                     ingredients, dairyFree, vegetarian, vegan, kosher, halal, diabetes, allergies, extras, user_id
                 })
                 console.log('res data:', response.data.meal);
